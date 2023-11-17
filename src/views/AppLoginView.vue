@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <div>
     <b-container>
       <b-row>
         <b-col></b-col>
         <b-col cols = 6>
-          <b-card title="login">
+          <b-card title="Login">
             <br>
     <b-form @submit="login">
       <b-form-group
@@ -16,7 +16,7 @@
             required
         ></b-form-input>
       </b-form-group>
-
+      <br>
       <b-form-group
           label="Password"
       >
@@ -30,6 +30,7 @@
       <br>
       <b-button type="submit" variant="primary">Login</b-button>
     </b-form>
+    <router-link to="register">Registro</router-link>
   </b-card>
         </b-col>
         <b-col></b-col>
