@@ -30,7 +30,8 @@
                 ></b-form-input>
               </b-form-group>
               <br>
-              <b-button type="submit" variant="primary">Save</b-button>
+              <button type="submit" variant="primary">Save</button>
+              <button type="submit" variant="primary" @click="backbutton">Back</button>
             </b-form>
           </b-card>
         </b-col>
@@ -79,7 +80,13 @@ export default {
     ); 
     console.log(response); 
     
-}
+},
+backbutton(){
+      this.$router.push({ name: 'listaligas' });
+
+    }
+    
+
 }
 }
 </script>

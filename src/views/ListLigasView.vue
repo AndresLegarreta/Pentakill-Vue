@@ -13,15 +13,25 @@
       </thead>
       <tbody>
         <tr v-for="liga in ligas" :key="liga._id">
-          <td>{{ liga.nombre }}</td>
-          <td>{{ liga.region }}</td>
+          <td v-if="!liga.editing">{{ liga.nombre }}</td>
+      <td v-if="liga.editing">
+        <b-form-input v-model="liga.nombre" />
+      </td>
+
+      <td v-if="!liga.editing">{{ liga.region }}</td>
+      <td v-if="liga.editing">
+        <b-form-input v-model="liga.region" />
+      </td>
           <td><img :src="liga.imagen" alt="Imagen de Liga" class="table-img" /></td>
+          <button v-if="!liga.editing" @click="habilitarEdicion(liga)">Editar</button>
+        <button v-if="liga.editing" @click="actualizarLiga(liga)">Actualizar</button>
           <td><button v-on:click="eliminarObjeto(liga._id)">Eliminar</button></td>
         </tr>
       </tbody>
     </table>
     <br>
-    <b-button type="submit" variant="primary" @click="agregarLigas">Agregar Ligas</b-button>
+    <button type="submit" variant="primary" @click="agregarLigas">Agregar Ligas</button>
+    
   </div>
 </b-container>
 </template>
@@ -51,6 +61,31 @@
     this.obtenerLigas();
   },
     methods:{
+
+      habilitarEdicion(liga) {
+      this.$set(liga, 'editing', true);
+    },
+    async actualizarLiga(liga) {
+      const tokenAutenticacion = localStorage.getItem("jwt");
+      const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
+      try {
+        await axios.patch(`${serverURL}ligas/${liga._id}`, {
+          nombre: liga.nombre,
+          region: liga.region,
+          imagen: liga.imagen
+        }, {
+          headers: {
+            'Authorization': `Bearer ${tokenAutenticacion}`
+          }
+        });
+        liga.editing = false; // Deshabilitar modo de edición
+        this.obtenerLigas(); // Actualizar la lista de ligas
+      } catch (error) {
+        console.error("Error al actualizar la liga:", error);
+      }
+    },
+
+
       async obtenerLigas(){
         const tokenAutenticacion = localStorage.getItem("jwt");
         const requestBody = {
@@ -88,13 +123,16 @@ async eliminarObjeto(idLiga) {
   } catch (error) {
     console.error("Error al eliminar la liga:", error);
   }
-}
 },
 agregarLigas() {
       this.$router.push({ name: 'ligas' });
-    }
+    },
+
 }
-  
+
+
+
+}  
   </script>
   
   

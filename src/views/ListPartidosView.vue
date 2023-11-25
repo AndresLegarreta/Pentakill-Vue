@@ -18,23 +18,59 @@
         </thead>
         <tbody>
           <tr v-for="partido in partidos" :key="partido._id">
-            <td>{{ partido.nombreleague }}</td>
-            <td>{{ partido.equipo1 }}</td>
-            <td>{{ partido.equipo1res }}</td>
-            <td>{{ partido.equipo2 }}</td>
-            <td>{{ partido.equipo2res }}</td>
-            <td>{{ partido.fecha }}</td>
-            <td>{{ partido.equipogp }}</td>
-            <td>{{ partido.gamenm }}</td>
-            <td>{{ partido.nombrepartido }}</td>
-            <td>
-              <button v-on:click="eliminarObjeto(partido._id)">Eliminar</button>
-            </td>
+
+          <td v-if="!partido.editing">{{ partido.nombreleague }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.nombreleague" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.equipo1 }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.equipo1" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.equipo1res }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.equipo1res" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.equipo2 }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.equipo2" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.equipo2res }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.equipo2res" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.fecha }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.fecha" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.equipogp }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.equipogp" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.gamenm }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.gamenm" />
+          </td>
+
+          <td v-if="!partido.editing">{{ partido.nombrepartido }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.nombrepartido" />
+          </td>    
+              <button v-if="!partido.editing" @click="habilitarEdicionPartido(partido)">Editar</button>
+              <button v-if="partido.editing" @click="actualizarPartido(partido)">Actualizar</button>
+              <td><button v-on:click="eliminarObjeto(partido._id)">Eliminar</button></td> 
           </tr>
         </tbody>
       </table>
       <br>
-      <b-button type="submit" variant="primary" @click="agregarPartido">Agregar Partidos</b-button>
+      <button type="submit" variant="primary" @click="agregarPartido">Agregar Partidos</button>
     </div>
   </template>
   
@@ -70,6 +106,34 @@ export default {
       this.obtenerPartidos();
     },
       methods:{
+
+      habilitarEdicionPartido(partido) {
+      this.$set(partido, 'editing', true);
+},
+    async actualizarPartido(partido) {
+  const tokenAutenticacion = localStorage.getItem("jwt");
+  const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
+  
+    await axios.patch(`${serverURL}partidos/${partido._id}`, {
+      nombreleague: partido.nombreleague,
+      equipo1: partido.equipo1,
+      equipo1res: partido.equipo1res,
+      equipo2: partido.equipo2,
+      equipo2res: partido.equipo2res,
+      fecha: partido.fecha,
+      equipogp: partido.equipogp,
+      gamenm: partido.gamenm,
+      nombrepartido: partido.nombrepartido
+    }, {
+      headers: {
+        'Authorization': `Bearer ${tokenAutenticacion}`
+      }
+    });
+    partido.editing = false;
+    this.obtenerPartidos();
+},
+
+
         async obtenerPartidos(){
           const tokenAutenticacion = localStorage.getItem("jwt");
           const requestBody = {
@@ -93,10 +157,10 @@ export default {
             }
           }
         );
-        if (response && response.data){
-          this.partidos = response.data;
-        }
-      },
+        if (response && response.data) {
+    this.partidos = response.data.map(partido => ({ ...partido, editing: false }));
+  }
+},
       
   
   async eliminarObjeto(idPartido) {
@@ -109,17 +173,18 @@ export default {
           'Authorization': `Bearer ${tokenAutenticacion}`
         }
       });
-      this.obtenerLigas();
+      this.obtenerPartidos();
     } catch (error) {
       console.error("Error al eliminar el partido:", error);
     }
-  }
-  
+  },
+  agregarPartido() {
+      this.$router.push({ name: 'partidos' });
     },
-    agregarPartido() {
-      this.$router.push({ path: '/partidospath' });
-    }
-  }
+
+},
+      
+}
     
     </script>
     

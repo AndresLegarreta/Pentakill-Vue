@@ -28,7 +28,8 @@ export default {
   data(){
     return{
       username:"",
-      password:""
+      password:"",
+      isSidebarVisible: false
     }
   },
   methods:{

@@ -2,7 +2,7 @@
   <div class="partidos-view">
     <h2>Agregar Nuevo Partido</h2>
     <br>
-    <b-form @submit.prevent="login">
+    <b-form @submit.prevent="nuevoPartido">
       <b-form-group label="Nombre de Liga:" label-for="nombreliga">
         <b-form-input id="nombreliga" v-model="nombredeliga" required></b-form-input>
       </b-form-group>
@@ -38,8 +38,9 @@
       <b-form-group label="Número del Partido:" label-for="numeropartido">
         <b-form-input type="number" id="numeropartido" v-model="numeropartido" required></b-form-input>
       </b-form-group>
-<br>
-      <b-button type="submit" variant="primary">Crear Partido</b-button>
+      <br>
+      <button type="submit" variant="primary">Crear Partido</button>
+      <button type="submit" variant="primary" @click="backbutton">Back</button>
     </b-form>
   </div>
 </template>
@@ -98,6 +99,10 @@ export default {
     // Aquí es donde manejas la respuesta del servidor:
     console.log(response); // Este es el mensaje de confirmación
     
+
+    },
+    backbutton(){
+      this.$router.push({ name: 'listapartidos' });
 
     }
 }
@@ -183,6 +188,7 @@ export default {
   text-align: center; /* Centra el texto del título */
   width: 100%; /* Opcional: hace que el título ocupe todo el ancho disponible */
   margin-bottom: 1rem; /* Espacio debajo del título */
+  color: #2c3e50
 }
 
 
