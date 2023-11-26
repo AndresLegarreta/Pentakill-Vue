@@ -69,6 +69,11 @@
           </tr>
         </tbody>
       </table>
+      
+  <div v-if="partidos.length === 0" class="empty-state">
+  <p>No hay partidos disponibles.</p>
+</div>
+<br>
       <br>
       <button type="submit" variant="primary" @click="agregarPartido">Agregar Partidos</button>
     </div>
@@ -254,6 +259,16 @@ body {
   color: white; /* Color de texto para el botón */
 
 
+}
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+.empty-state img {
+  max-width: 100%;
+  height: auto;
 }
   </style>
   
