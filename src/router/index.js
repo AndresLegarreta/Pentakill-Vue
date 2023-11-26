@@ -26,13 +26,31 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue'),
     children: [
-      {
-        path: 'ligas',
+      { 
+        path: 'ligaspath',
+        name: 'ligas',
         component: () => import(/* webpackChunkName: "about" */ '../views/LigasView.vue')
-      }    
+      },
+      { 
+        path: 'partidospath',
+        name: 'partidos',
+        component: () => import(/* webpackChunkName: "about" */ '../views/PartidosView.vue'),
+      },
+      { 
+        path: 'listadoligas',
+        name: 'listaligas',  
+        component: () => import(/* webpackChunkName: "about" */ '../views/ListLigasView.vue')
+      },
+      {
+        path: 'listadopartidos',
+        name: 'listapartidos',  
+        component: () => import(/* webpackChunkName: "about" */ '../views/ListPartidosView.vue')
+      },    
     ]
-  }
-]
+  },
+  
+];
+
 
 const router = new VueRouter({
   mode: 'history',

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class ="center-container">
     <b-container>
       <b-row>
         <b-col></b-col>
@@ -37,7 +37,6 @@
       </b-row>
     </b-container>
 
-
   </div>
 </template>
 
@@ -65,21 +64,64 @@ export default {
         us: this.username,
         pass: this.password
       }
-    await axios.post('https://tasty-pig-flip-flops.cyclic.app/users/login', requestBody); 
-    
-    
-  }
+      
+      const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
+
+    try{
+     const response = await axios.post(`${serverURL}users/login`, requestBody);
+
+    console.log(response);
+    if (response && response.data && response.data.token){
+      localStorage.setItem("jwt", response.data.token)
+
+      this.$router.push({path: "/dashboard"})      
+      
+    }else{
+      alert("Error en el Login")
+      }
+        }catch (err){
+        alert("Error en el Login")
+      }
+    } 
+  },
 }
 </script>
 
 
 <style>
+.center-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Altura completa de la ventana */
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Beaufort';
+  src: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\BeaufortForLoL-OTF\BeaufortForLoL-OTF\BeaufortforLOL-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Beaufort', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\lol wallpaper.jpg'); /* Ruta relativa a la imagen */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el relleno predeterminado */
+  background-size: cover; /* La imagen cubre completamente el área visible */
+  background-position: center; /* Centra la imagen en la página */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+  height: 100vh; /* Asegúrate de que el body ocupe al menos la altura de la ventana */
+  width: 100vw; /* Centra los hijos horizontalmente */
 }
 </style>

@@ -4,7 +4,10 @@
     <b-sidebar visible id="sidebar-1" title="Sidebar" shadow>
       Ventana de Catalogo
       <br>
-      <router-link to="dashboard/ligas">Ligas</router-link> 
+      <div class="d-flex flex-column">
+      <router-link :to="{name: 'listaligas'}">Ligas</router-link> 
+      <router-link :to="{name: 'listapartidos'}">Partidos</router-link> 
+    </div> 
     </b-sidebar>
     <router-view></router-view>
 
@@ -25,7 +28,8 @@ export default {
   data(){
     return{
       username:"",
-      password:""
+      password:"",
+      isSidebarVisible: false
     }
   },
   methods:{
@@ -43,8 +47,15 @@ export default {
 
 
 <style>
+@font-face {
+  font-family: 'Beaufort';
+  src: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\BeaufortForLoL-OTF\BeaufortForLoL-OTF\BeaufortforLOL-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Beaufort', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
