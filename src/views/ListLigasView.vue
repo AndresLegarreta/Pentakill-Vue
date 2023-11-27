@@ -229,6 +229,7 @@ h2 {
 .empty-state {
   text-align: center;
   padding: 20px;
+  color: white;
 }
 
 .empty-state img {
