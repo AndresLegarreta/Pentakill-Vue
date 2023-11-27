@@ -63,9 +63,9 @@
           <td v-if="partido.editing">
             <b-form-input v-model="partido.nombrepartido" />
           </td>    
-              <button v-if="!partido.editing" @click="habilitarEdicionPartido(partido)">Editar</button>
-              <button v-if="partido.editing" @click="actualizarPartido(partido)">Actualizar</button>
-              <td><button v-on:click="eliminarObjeto(partido._id)">Eliminar</button></td> 
+              <button v-if="!partido.editing" @click="habilitarEdicionPartido(partido)"><i class="bi bi-pencil-square"></i></button>
+              <button v-if="partido.editing" @click="actualizarPartido(partido)"><i class="bi bi-arrow-counterclockwise"></i></button>
+              <td><button v-on:click="eliminarObjeto(partido._id)"><i class="bi bi-trash3"></i></button></td> 
           </tr>
         </tbody>
       </table>

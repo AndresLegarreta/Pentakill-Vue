@@ -23,9 +23,9 @@
         <b-form-input v-model="liga.region" />
       </td>
           <td><img :src="liga.imagen" alt="Imagen de Liga" class="table-img" /></td>
-          <button v-if="!liga.editing" @click="habilitarEdicion(liga)">Editar</button>
-        <button v-if="liga.editing" @click="actualizarLiga(liga)">Actualizar</button>
-          <td><button v-on:click="eliminarObjeto(liga._id)">Eliminar</button></td>
+          <button v-if="!liga.editing" @click="habilitarEdicion(liga)"><i class="bi bi-pencil-square"></i></button>
+        <button v-if="liga.editing" @click="actualizarLiga(liga)"><i class="bi bi-arrow-counterclockwise"></i></button>
+          <td><button v-on:click="eliminarObjeto(liga._id)"><i class="bi bi-trash3"></i></button></td>
         </tr>
       </tbody>
     </table>
