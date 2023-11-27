@@ -29,6 +29,11 @@
         </tr>
       </tbody>
     </table>
+    <!-- Mensaje de Empty State si no hay ligas -->
+  <div v-if="ligas.length === 0" class="empty-state">
+  <p>No hay ligas disponibles.</p>
+</div>
+<br>
     <br>
     <button type="submit" variant="primary" @click="agregarLigas">Agregar Ligas</button>
     
@@ -220,6 +225,15 @@ h2 {
   color: white; /* Color de texto para el botón */
 
 
+}
+.empty-state {
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-state img {
+  max-width: 100%;
+  height: auto;
 }
 </style>
 
