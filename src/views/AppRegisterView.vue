@@ -86,13 +86,13 @@ body, html {
 }*/
 
   #app {
-    font-family: 'Helvetica','Arial', sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-  /*  background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\lol wallpaper.jpg'); */
+    background-image: url('https://cdn.beahero.gg/2021/02/Youtube-Version-1080p.jpg'); 
     background-size: cover; /* Asegúrate de que la imagen cubra todo el contenedor */
     background-position: center; /* Centra la imagen en el contenedor */
     background-repeat: no-repeat; /* Centra los hijos horizontalmente */
