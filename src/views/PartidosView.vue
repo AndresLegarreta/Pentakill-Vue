@@ -143,7 +143,7 @@ export default {
 }
 
 .partidos-view {
-  font-family: 'Helvetica','Arial', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   max-width: 600px;
   margin: 40px auto;
   padding: 20px;

@@ -1,44 +1,38 @@
 <template>
-  <div class ="center-container">
-    <b-container>
-      <b-row>
-        <b-col></b-col>
-        <b-col cols ="10">
-          <b-card title="Login">
+  <b-container>
+    <b-row>
+    <b-col></b-col>
+      <b-col cols="6">
+        <b-card title="Login">
+          <b-form @submit.prevent="login">
             <br>
-    <b-form @submit="login">
-      <b-form-group
-          label="Username"
-      >
-        <b-form-input
-            v-model="username"
-            placeholder="Enter your username"
-            required
-        ></b-form-input>
-      </b-form-group>
-      <br>
-      <b-form-group
-          label="Password"
-      >
-        <b-form-input
-            v-model="password"
-            type="password"
-            placeholder="Enter your password"
-            required
-        ></b-form-input>
-      </b-form-group>
-      <br>
-      <b-button type="submit" variant="primary">Login</b-button>
-    </b-form>
-    <router-link to="register">Registro</router-link>
-  </b-card>
-        </b-col>
-        <b-col></b-col>
+            <b-form-group label="Username">
+              <b-form-input
+                v-model="username"
+                placeholder="Enter your username"
+                required
+              ></b-form-input>
+            </b-form-group>
+            <br>
+            <b-form-group label="Password">
+              <b-form-input
+                v-model="password"
+                type="password"
+                placeholder="Enter your password"
+                required
+              ></b-form-input>
+            </b-form-group>
+            <br>
+            <b-button type="submit" variant="primary">Login</b-button>
+          </b-form>
+          <router-link to="register">Registro</router-link>
+        </b-card>
+      </b-col>
+      <b-col></b-col>
       </b-row>
-    </b-container>
-
-  </div>
+  </b-container>
 </template>
+
 
 <script>
 
@@ -110,18 +104,13 @@ body, html {
 
 #app {
   font-family: 'Times New Roman', Times, serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  background-image: url('https://cdn.beahero.gg/2021/02/Youtube-Version-1080p.jpg'); 
-  margin: 0; /* Elimina el margen predeterminado */
-  padding: 0; /* Elimina el relleno predeterminado */
-  background-size: cover; /* La imagen cubre completamente el área visible */
-  background-position: center; /* Centra la imagen en la página */
-  background-repeat: no-repeat; /* Evita la repetición de la imagen */
-  height: 100vh; /* Asegúrate de que el body ocupe al menos la altura de la ventana */
-  width: 100vw; /* Centra los hijos horizontalmente */
+  background-image: url('https://cdn.beahero.gg/2021/02/Youtube-Version-1080p.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
 }
 </style>

@@ -1,9 +1,8 @@
 <template>
-  <div class ="center-container">
       <b-container>
         <b-row>
           <b-col></b-col>
-          <b-col cols="10">
+          <b-col cols="6">
             <b-card title="Register">
             <b-form @submit="register"> 
                 <br>
@@ -20,13 +19,10 @@
             <router-link to="/">Login</router-link>
             <br>
           </b-card>
-  
           </b-col>
           <b-col></b-col>
-  
         </b-row>
       </b-container>
-    </div>
   </template>
   
   <script>
