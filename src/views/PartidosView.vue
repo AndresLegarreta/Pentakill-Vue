@@ -41,6 +41,9 @@
       <br>
       <button type="submit" variant="primary">Crear Partido</button>
       <button type="submit" variant="primary" @click="backbutton">Back</button>
+      <div class="menu-container">
+          <button @click="logout">Log-out</button>
+    </div>
     </b-form>
   </div>
 </template>
@@ -104,8 +107,12 @@ export default {
     backbutton(){
       this.$router.push({ name: 'listapartidos' });
 
+    },
+    logout() {
+      localStorage.removeItem('jwt');
+      this.$router.push({ name: 'login'});
     }
-}
+ }
 }
 
 
@@ -114,21 +121,21 @@ export default {
 
 
 <style>
-@font-face {
+/*@font-face {
   font-family: 'Beaufort';
   src: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\BeaufortForLoL-OTF\BeaufortForLoL-OTF\BeaufortforLOL-Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
-}
+}*/
 
 #app {
-  font-family: 'Beaufort', sans-serif;
+  font-family: 'Helvetica','Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\t1.jpg'); /* Ruta relativa a la imagen */
+/*  background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\t1.jpg'); */
   background-size: cover; /* Asegúrate de que la imagen cubra todo el contenedor */
   background-position: center; /* Centra la imagen en el contenedor */
   background-repeat: no-repeat; /* Centra los hijos horizontalmente */
@@ -136,7 +143,7 @@ export default {
 }
 
 .partidos-view {
-  font-family: 'Beaufort', sans-serif;
+  font-family: 'Helvetica','Arial', sans-serif;
   max-width: 600px;
   margin: 40px auto;
   padding: 20px;
@@ -184,6 +191,17 @@ export default {
   margin-top: 10px; /* Espacio adicional arriba del botón */
   width: 80%;
 }
+
+.menu-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  padding: 10px;
+  background-color: white;
+  width: 15%;
+}
+
 .partidos-view h2 {
   text-align: center; /* Centra el texto del título */
   width: 100%; /* Opcional: hace que el título ocupe todo el ancho disponible */

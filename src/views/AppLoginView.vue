@@ -101,21 +101,21 @@ body, html {
   padding: 0;
 }
 
-@font-face {
+/*@font-face {
   font-family: 'Beaufort';
   src: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\BeaufortForLoL-OTF\BeaufortForLoL-OTF\BeaufortforLOL-Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
-}
+}*/
 
 #app {
-  font-family: 'Beaufort', sans-serif;
+  font-family: 'Helvetica','Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\lol wallpaper.jpg'); /* Ruta relativa a la imagen */
+/*  background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\lol wallpaper.jpg'); */
   margin: 0; /* Elimina el margen predeterminado */
   padding: 0; /* Elimina el relleno predeterminado */
   background-size: cover; /* La imagen cubre completamente el área visible */

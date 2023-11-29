@@ -36,7 +36,9 @@
 <br>
     <br>
     <button type="submit" variant="primary" @click="agregarLigas">Agregar Ligas</button>
-    
+    <div class="menu-container">
+          <button @click="logout">Log-out</button>
+    </div>
   </div>
 </b-container>
 </template>
@@ -132,6 +134,11 @@ async eliminarObjeto(idLiga) {
 agregarLigas() {
       this.$router.push({ name: 'ligas' });
     },
+  
+    logout() {
+      localStorage.removeItem('jwt');
+      this.$router.push({ name: 'login'});
+    }
 
 }
 
@@ -158,15 +165,15 @@ body {
 }
 
 
-@font-face {
+/*@font-face {
   font-family: 'Beaufort';
   src: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\BeaufortForLoL-OTF\BeaufortForLoL-OTF\BeaufortforLOL-Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
-}
+}*/
 
 #app {
-  font-family: 'Beaufort', sans-serif;
+  font-family: 'Helvetica','Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -174,7 +181,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\t1.jpg'); /* Ruta relativa a la imagen */
+ /* background-image: url('C:\Users\andes\OneDrive\Documentos\ULSA\Programacion para Internet\vue-pentakill\src\assets\t1.jpg'); */
   background-size: cover; /* Asegúrate de que la imagen cubra todo el contenedor */
   background-position: center; /* Centra la imagen en el contenedor */
   background-repeat: no-repeat; /* Centra los hijos horizontalmente */
@@ -235,6 +242,16 @@ h2 {
 .empty-state img {
   max-width: 100%;
   height: auto;
+}
+
+.menu-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  padding: 10px;
+  background-color: white;
+  width: 15%;
 }
 </style>
 
