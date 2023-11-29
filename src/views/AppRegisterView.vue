@@ -3,7 +3,7 @@
       <b-container>
         <b-row>
           <b-col></b-col>
-          <b-col cols="6">
+          <b-col cols="12">
             <b-card title="Register">
             <b-form @submit="register"> 
                 <br>
