@@ -7,7 +7,7 @@
         <b-form-input id="nombreliga" v-model="nombredeliga" required></b-form-input>
       </b-form-group>
 
-      <b-form-group label="Fase del Partido:" label-for="nombrepartido">
+      <b-form-group label="Nombre del Partido:" label-for="nombrepartido">
         <b-form-input id="nombrepartido" v-model="nombrepartido" required></b-form-input>
       </b-form-group>
 
@@ -15,16 +15,8 @@
         <b-form-input id="equipo1" v-model="equiponum1" required></b-form-input>
       </b-form-group>
 
-      <b-form-group label="Resumen Equipo 1:" label-for="equipo1resumen">
-        <b-form-input id="equipo1resumen" v-model="equiponum1resumen" required></b-form-input>
-      </b-form-group>
-
       <b-form-group label="Equipo 2:" label-for="equipo2">
         <b-form-input id="equipo2" v-model="equiponum2" required></b-form-input>
-      </b-form-group>
-
-      <b-form-group label="Resumen Equipo 2:" label-for="equipo2resumen">
-        <b-form-input id="equipo2resumen" v-model="equiponum2resumen" required></b-form-input>
       </b-form-group>
 
       <b-form-group label="Fecha del Partido:" label-for="fechapartido">
@@ -35,7 +27,7 @@
         <b-form-input id="resultado" v-model="resultado" required></b-form-input>
       </b-form-group>
 
-      <b-form-group label="Número del Partido:" label-for="numeropartido">
+      <b-form-group label="Fase del Partido:" label-for="numeropartido">
         <b-form-input type="number" id="numeropartido" v-model="numeropartido" required></b-form-input>
       </b-form-group>
       <br>
@@ -65,9 +57,7 @@ export default {
       nombredeliga:"",
       nombrepartido:"",
       equiponum1:"",
-      equiponum1resumen:"",
       equiponum2:"",
-      equiponum2resumen:"",
       fechapartido:"",
       resultado:"",
       numeropartido:"",
@@ -81,9 +71,7 @@ export default {
         nombreleague: this.nombredeliga,
         nombrepartido: this.nombrepartido,
         equipo1: this.equiponum1,
-        equipo1res: this.equiponum1resumen,
         equipo2: this.equiponum2,
-        equipo2res: this.equiponum2resumen,
         fecha: this.fechapartido,
         equipogp: this.resultado,
         gamenm: this.numeropartido

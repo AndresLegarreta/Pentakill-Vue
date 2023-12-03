@@ -45,6 +45,16 @@ const routes = [
         path: 'listadopartidos',
         name: 'listapartidos',  
         component: () => import(/* webpackChunkName: "about" */ '../views/ListPartidosView.vue')
+      },
+      {
+        path: 'championpath',
+        name: 'champion',  
+        component: () => import(/* webpackChunkName: "about" */ '../views/ChampionView.vue')
+      },
+      {
+        path: 'listadochampion',
+        name: 'listachampion',  
+        component: () => import(/* webpackChunkName: "about" */ '../views/ListChampionView.vue')
       },    
     ]
   },

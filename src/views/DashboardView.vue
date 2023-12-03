@@ -7,6 +7,7 @@
       <div class="d-flex flex-column">
       <router-link :to="{name: 'listaligas'}">Ligas</router-link> 
       <router-link :to="{name: 'listapartidos'}">Partidos</router-link> 
+      <router-link :to="{name: 'listachampion'}">Campeones</router-link> 
     </div> 
     </b-sidebar>
     <router-view></router-view>

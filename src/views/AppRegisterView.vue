@@ -81,16 +81,15 @@ body, html {
   font-style: normal;
 }*/
 
-  #app {
-    font-family: 'Times New Roman', Times, serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-    background-image: url('https://cdn.beahero.gg/2021/02/Youtube-Version-1080p.jpg'); 
-    background-size: cover; /* Asegúrate de que la imagen cubra todo el contenedor */
-    background-position: center; /* Centra la imagen en el contenedor */
-    background-repeat: no-repeat; /* Centra los hijos horizontalmente */
-  }
+#app {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  color: #2c3e50;
+  background-image: url('https://cdn.beahero.gg/2021/02/Youtube-Version-1080p.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+}
   </style>

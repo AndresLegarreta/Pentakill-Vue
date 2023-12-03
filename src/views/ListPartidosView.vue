@@ -6,13 +6,11 @@
         <thead>
           <tr>
             <th>Nombre de la Liga</th>
-            <th>Equipo 1</th>
-            <th>Resumen Equipo 1</th>
+            <th>Nombre del Partido</th>
+            <th>Equipo 1</th>   
             <th>Equipo 2</th>
-            <th>Resumen Equipo 2</th>
             <th>Fecha del Partido</th>
             <th>Resultado</th>
-            <th>Número del Partido</th>
             <th>Fase del Partido</th>
           </tr>
         </thead>
@@ -24,24 +22,19 @@
             <b-form-input v-model="partido.nombreleague" />
           </td>
 
+          <td v-if="!partido.editing">{{ partido.nombrepartido }}</td>
+          <td v-if="partido.editing">
+            <b-form-input v-model="partido.nombrepartido" />
+          </td>
+
           <td v-if="!partido.editing">{{ partido.equipo1 }}</td>
           <td v-if="partido.editing">
             <b-form-input v-model="partido.equipo1" />
           </td>
 
-          <td v-if="!partido.editing">{{ partido.equipo1res }}</td>
-          <td v-if="partido.editing">
-            <b-form-input v-model="partido.equipo1res" />
-          </td>
-
           <td v-if="!partido.editing">{{ partido.equipo2 }}</td>
           <td v-if="partido.editing">
             <b-form-input v-model="partido.equipo2" />
-          </td>
-
-          <td v-if="!partido.editing">{{ partido.equipo2res }}</td>
-          <td v-if="partido.editing">
-            <b-form-input v-model="partido.equipo2res" />
           </td>
 
           <td v-if="!partido.editing">{{ partido.fecha }}</td>
@@ -59,10 +52,7 @@
             <b-form-input v-model="partido.gamenm" />
           </td>
 
-          <td v-if="!partido.editing">{{ partido.nombrepartido }}</td>
-          <td v-if="partido.editing">
-            <b-form-input v-model="partido.nombrepartido" />
-          </td>    
+              
               <button v-if="!partido.editing" @click="habilitarEdicionPartido(partido)"><i class="bi bi-pencil-square"></i></button>
               <button v-if="partido.editing" @click="actualizarPartido(partido)"><i class="bi bi-arrow-counterclockwise"></i></button>
               <td><button v-on:click="eliminarObjeto(partido._id)"><i class="bi bi-trash3"></i></button></td> 
@@ -99,9 +89,7 @@ export default {
     return{
       nombredeligapl:"",
       equiponum1pl:"",
-      equiponum1resumenpl:"",
       equiponum2pl:"",
-      equiponum2resumenpl:"",
       fechapartidopl:"",
       resultadopl:"",
       numeropartidopl:"",
@@ -125,9 +113,7 @@ export default {
     await axios.patch(`${serverURL}partidos/${partido._id}`, {
       nombreleague: partido.nombreleague,
       equipo1: partido.equipo1,
-      equipo1res: partido.equipo1res,
       equipo2: partido.equipo2,
-      equipo2res: partido.equipo2res,
       fecha: partido.fecha,
       equipogp: partido.equipogp,
       gamenm: partido.gamenm,
@@ -147,9 +133,7 @@ export default {
           const requestBody = {
             nombreleague: this.nombredeligapl,
             equipo1: this.equiponum1pl,
-            equipo1res: this.equiponum1resumenpl,
             equipo2: this.equiponum2pl,
-            equipo2res: this.equiponum2resumenpl,
             fecha: this.fechapartidopl,
             equipogp: this.resultadopl,
             gamernm: this.numeropartidopl,
