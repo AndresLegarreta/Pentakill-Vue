@@ -62,7 +62,7 @@
   </script>
   
   <style>
-.center-container {
+.b-container {
   display: flex;
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */

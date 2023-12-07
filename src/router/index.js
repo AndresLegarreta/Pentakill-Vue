@@ -55,17 +55,35 @@ const routes = [
         path: 'listadochampion',
         name: 'listachampion',  
         component: () => import(/* webpackChunkName: "about" */ '../views/ListChampionView.vue')
+      },
+      {
+        path: 'noticiaspath',
+        name: 'noticias',  
+        component: () => import(/* webpackChunkName: "about" */ '../views/NoticiasView.vue')
+      },
+      {
+        path: 'listadonoticias',
+        name: 'listanoticias',  
+        component: () => import(/* webpackChunkName: "about" */ '../views/ListNoticiasView.vue')
       },    
     ]
   },
   
 ];
-
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/', '/register'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('jwt');
+  if (authRequired && !loggedIn) {
+    return next('/');
+  }
+  next();
 })
 
 export default router

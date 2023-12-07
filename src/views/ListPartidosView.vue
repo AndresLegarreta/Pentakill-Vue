@@ -16,11 +16,12 @@
         </thead>
         <tbody>
           <tr v-for="partido in partidos" :key="partido._id">
+            <td v-if="!partido.editing">{{ partido.nombreleague ? partido.nombreleague.nombre : "" }}</td>
+            <td v-if="partido.editing">
+    <b-form-select v-model="partido.nombreleague" :options="opcionesLigas" required placeholder="Seleccione una liga"></b-form-select>
+</td>
 
-          <td v-if="!partido.editing">{{ partido.nombreleague }}</td>
-          <td v-if="partido.editing">
-            <b-form-input v-model="partido.nombreleague" />
-          </td>
+            
 
           <td v-if="!partido.editing">{{ partido.nombrepartido }}</td>
           <td v-if="partido.editing">
@@ -51,8 +52,9 @@
           <td v-if="partido.editing">
             <b-form-input v-model="partido.gamenm" />
           </td>
+          
 
-              
+
               <button v-if="!partido.editing" @click="habilitarEdicionPartido(partido)"><i class="bi bi-pencil-square"></i></button>
               <button v-if="partido.editing" @click="actualizarPartido(partido)"><i class="bi bi-arrow-counterclockwise"></i></button>
               <td><button v-on:click="eliminarObjeto(partido._id)"><i class="bi bi-trash3"></i></button></td> 
@@ -69,6 +71,9 @@
       <div class="menu-container">
           <button @click="logout">Log-out</button>
     </div>
+    <div class="filter-container">
+    <b-form-select v-model="ligaSeleccionada" @change="filtrarPorLiga" :options="opcionesLigas"></b-form-select>
+  </div>
     </div>
   </template>
   
@@ -94,13 +99,13 @@ export default {
       resultadopl:"",
       numeropartidopl:"",
       nombrepartidopl:"",
-      partidos: []
+      partidos: [],
+      ligaSeleccionada: null,
+      ligas: [],
+      opcionesLigas: [],
     }
   },
   
-    created() {
-      this.obtenerPartidos();
-    },
       methods:{
 
       habilitarEdicionPartido(partido) {
@@ -176,10 +181,81 @@ export default {
     logout() {
       localStorage.removeItem('jwt');
       this.$router.push({ name: 'login'});
-    }
+    },
+    async cargarLigas() {
+      const tokenAutenticacion = localStorage.getItem("jwt");
+      const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
 
-},
-      
+      try {
+        const response = await axios.get(`${serverURL}ligas/`, {
+          headers: {
+            'Authorization': `Bearer ${tokenAutenticacion}`
+          }
+        });
+
+        // Guardar las ligas en la data del componente
+        this.ligas = response.data;
+
+        // Preparar las opciones para el dropdown
+        this.opcionesLigas = this.ligas.map(liga => ({
+          value: liga._id,
+          text: liga.nombre
+        }));
+
+        // Agregar una opción para 'Todas las ligas' al inicio de las opciones
+        this.opcionesLigas.unshift({ value: null, text: 'Todas las Ligas' });
+      } catch (error) {
+        console.error('Error al cargar las ligas:', error);
+        // Manejar el error como creas conveniente
+      }
+    },
+
+    // Método para filtrar los partidos por la liga seleccionada
+    async obtenerPartidosPorLiga(ligaId) {
+    const tokenAutenticacion = localStorage.getItem("jwt");
+    const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
+
+    try {
+      // Agrega el ID de la liga como un parámetro de consulta en la solicitud GET
+      const response = await axios.get(`${serverURL}partidos/porLiga`, {
+        headers: {
+          'Authorization': `Bearer ${tokenAutenticacion}`
+        },
+        params: {
+          ligaId: ligaId // Asegúrate de que este nombre concuerde con el esperado en el backend
+        }
+      });
+      this.partidos = response.data;
+    } catch (error) {
+      console.error('Error al obtener los partidos por liga:', error);
+      // Manejar el error como creas conveniente
+    }
+    },
+
+    // Método invocado cuando se selecciona una liga del dropdown
+    filtrarPorLiga() {
+      if (this.ligaSeleccionada) {
+        this.obtenerPartidosPorLiga(this.ligaSeleccionada);
+      } else {
+        // Si no hay liga seleccionada o se selecciona 'Todas las Ligas', obtener todos los partidos
+        this.obtenerPartidos();
+      }
+  },
+  
+ },
+ created() {
+    this.cargarLigas();
+    this.obtenerPartidos();
+  },
+
+ computed: {
+  OpcionesLigas() {
+    return this.ligas.map(liga => ({
+      value: liga._id, 
+      text: liga.nombre
+    }));
+  }
+ }
 }
     
     </script>
@@ -268,6 +344,15 @@ body {
   top: 0;
   z-index: 1000;
   padding: 10px;
+  background-color: white;
+  width: 15%;
+}
+.filter-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  padding: 30px;
   background-color: white;
   width: 15%;
 }

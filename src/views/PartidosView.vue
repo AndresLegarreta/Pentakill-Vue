@@ -3,8 +3,8 @@
     <h2>Agregar Nuevo Partido</h2>
     <br>
     <b-form @submit.prevent="nuevoPartido">
-      <b-form-group label="Nombre de Liga:" label-for="nombreliga">
-        <b-form-input id="nombreliga" v-model="nombredeliga" required></b-form-input>
+      <b-form-group label="Liga:" label-for="ligaId">
+        <b-form-select id="ligaId" v-model="ligaSeleccionada" :options="OpcionesLigas" required></b-form-select>
       </b-form-group>
 
       <b-form-group label="Nombre del Partido:" label-for="nombrepartido">
@@ -30,9 +30,15 @@
       <b-form-group label="Fase del Partido:" label-for="numeropartido">
         <b-form-input type="number" id="numeropartido" v-model="numeropartido" required></b-form-input>
       </b-form-group>
+      
+
+
       <br>
       <button type="submit" variant="primary">Crear Partido</button>
       <button type="submit" variant="primary" @click="backbutton">Back</button>
+      <div v-if="nombreLigaSeleccionada">
+        <p>Partido creado en la liga: {{ nombreLigaSeleccionada }}</p>
+      </div>
       <div class="menu-container">
           <button @click="logout">Log-out</button>
     </div>
@@ -61,6 +67,9 @@ export default {
       fechapartido:"",
       resultado:"",
       numeropartido:"",
+    ligaSeleccionada: null, // Almacena la liga seleccionada
+    ligas: [],
+    nombreLigaSeleccionada: '',
     }
   },
   methods:{
@@ -68,14 +77,14 @@ export default {
       event.preventDefault();
       const tokenAutenticacion = localStorage.getItem("jwt");
       const requestBody = {
-        nombreleague: this.nombredeliga,
+        
         nombrepartido: this.nombrepartido,
         equipo1: this.equiponum1,
         equipo2: this.equiponum2,
         fecha: this.fechapartido,
         equipogp: this.resultado,
-        gamenm: this.numeropartido
-        
+        gamenm: this.numeropartido,
+        nombreleague: this.ligaSeleccionada        
       }
       const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
     
@@ -87,6 +96,10 @@ export default {
         }
       }
     ); 
+    const liga = this.ligas.find(l => l._id === this.ligaSeleccionada);
+    const nombreLiga = liga ? liga.nombre : 'Liga no encontrada';
+
+  console.log(`Partido creado en la liga: ${nombreLiga}`);
     // Aquí es donde manejas la respuesta del servidor:
     console.log(response); // Este es el mensaje de confirmación
     
@@ -99,7 +112,34 @@ export default {
     logout() {
       localStorage.removeItem('jwt');
       this.$router.push({ name: 'login'});
-    }
+    },
+    async cargarLigas() {
+  const tokenAutenticacion = localStorage.getItem("jwt");
+  const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
+
+  try {
+    const response = await axios.get(`${serverURL}ligas/`, {
+      headers: {
+        'Authorization': `Bearer ${tokenAutenticacion}`
+      }
+    });
+    this.ligas = response.data;
+  } catch (error) {
+    console.error('Error al obtener las ligas:', error);
+  }
+},
+
+},
+ created() {
+  this.cargarLigas();
+},
+computed: {
+  OpcionesLigas() {
+    return this.ligas.map(liga => ({
+      value: liga._id, 
+      text: liga.nombre
+    }));
+  }
  }
 }
 

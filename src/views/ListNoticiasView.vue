@@ -1,46 +1,42 @@
 <template>
     <b-container>
-      <div class="containercolor"> 
-        <h2>Lista de Campeones</h2>
+      <div class="containercolor">
+        <h2>Lista de Noticias</h2>
         <br>
         <table>
           <thead>
             <tr>
-              <th>Imagen</th>
               <th>Nombre</th>
-              <th>Alias</th>
-              <th>Descripción</th>      
+              <th>Imagen</th>
+              <th>Link</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="campeon in campeones" :key="campeon._id">
-              <td><img :src="campeon.image" alt="Imagen del Campeón" class="table-img" /></td>
+            <tr v-for="noticia in noticias" :key="noticia._id">
+              <td v-if="!noticia.editing">{{ noticia.nombrenot }}</td>
+              <td v-if="noticia.editing">
+                <b-form-input v-model="noticia.nombrenot" />
+              </td>
 
-              <td v-if="!campeon.editing">{{ campeon.name }}</td>
-              <td v-if="campeon.editing">
-                <b-form-input v-model="campeon.name" />
+              <td><img :src="noticia.imagennot" alt="Imagen de la Noticia" class="table-img" /></td>
+
+              <td v-if="!noticia.editing">{{ noticia.link }}</td>
+              <td v-if="noticia.editing">
+                <b-form-input v-model="noticia.link" />
               </td>
-              <td v-if="!campeon.editing">{{ campeon.description }}</td>
-              <td v-if="campeon.editing">
-                <b-form-input v-model="campeon.description" />
-              </td>
-              <td v-if="!campeon.editing">{{ campeon.blurb }}</td>
-              <td v-if="campeon.editing">
-                <b-form-input v-model="campeon.blurb" />
-              </td>
-              <button v-if="!campeon.editing" @click="habilitarEdicion(campeon)"><i class="bi bi-pencil-square"></i></button>
-              <button v-if="campeon.editing" @click="actualizarCampeon(campeon)"><i class="bi bi-arrow-counterclockwise"></i></button>
-              <td><button v-on:click="eliminarObjeto(campeon._id)"><i class="bi bi-trash3"></i></button></td>
+              
+              <button v-if="!noticia.editing" @click="habilitarEdicion(noticia)"><i class="bi bi-pencil-square"></i></button>
+              <button v-if="noticia.editing" @click="actualizarNoticia(noticia)"><i class="bi bi-arrow-counterclockwise"></i></button>
+              <td><button v-on:click="eliminarNoticia(noticia._id)"><i class="bi bi-trash3"></i></button></td>
             </tr>
           </tbody>
         </table>
-        <!-- Mensaje de Empty State si no hay campeones -->
-        <div v-if="campeones.length === 0" class="empty-state">
-          <p>No hay campeones disponibles.</p>
+        <div v-if="noticias.length === 0" class="empty-state">
+          <p>No hay noticias disponibles.</p>
         </div>
         <br>
         <br>
-        <button type="submit" variant="primary" @click="agregarCampeones">Agregar Campeones</button>
+        <button type="submit" variant="primary" @click="agregarNoticias">Agregar Noticias</button>
         <div class="menu-container">
           <button @click="logout">Cerrar Sesión</button>
         </div>
@@ -52,69 +48,73 @@
   import axios from 'axios';
   
   export default {
-    name: 'ChampionView',
+    name: 'NoticiasView',
     data() {
       return {
-        campeones: []
+        nombrenoticia: "",
+        linknoticia: "",
+        imagennoticia:"",
+        noticias: []
       }
     },
     created() {
-      this.obtenerCampeones();
+      this.obtenerNoticias();
     },
     methods: {
-      habilitarEdicion(campeon) {
-        this.$set(campeon, 'editing', true);
+      habilitarEdicion(noticia) {
+        this.$set(noticia, 'editing', true);
       },
-      async actualizarCampeon(campeon) {
+      async actualizarNoticia(noticia) {
         const tokenAutenticacion = localStorage.getItem("jwt");
         const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
         try {
-          await axios.put(`${serverURL}champ/${campeon._id}`, {
-            name: campeon.name,
-            blurb: campeon.blurb,
-            image: campeon.image,
-            description: campeon.description
+          await axios.put(`${serverURL}noticias/${noticia._id}`, {
+            nombrenot: noticia.nombrenot,
+            link: noticia.link,
+            imagennot: noticia.imagennot
           }, {
             headers: {
               'Authorization': `Bearer ${tokenAutenticacion}`
             }
           });
-          campeon.editing = false; // Deshabilitar modo de edición
-          this.obtenerCampeones(); // Actualizar la lista de campeones
+          noticia.editing = false; // Deshabilitar modo de edición
+          this.obtenerNoticias(); // Actualizar la lista de noticias
         } catch (error) {
-          console.error("Error al actualizar el campeón:", error);
+          console.error("Error al actualizar la noticia:", error);
         }
       },
-      async obtenerCampeones() {
-        const tokenAutenticacion = localStorage.getItem("jwt");
-        const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
-  
-        const response = await axios.get(`${serverURL}champ/`, {
-          headers: {
-            'Authorization': `Bearer ${tokenAutenticacion}`
-          }
-        });
-        if (response && response.data) {
-          this.campeones = response.data;
-        }
-      },
-      async eliminarObjeto(idCampeon) {
+      async obtenerNoticias() {
         const tokenAutenticacion = localStorage.getItem("jwt");
         const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
   
         try {
-          await axios.delete(`${serverURL}champ/${idCampeon}`, {
+          const response = await axios.get(`${serverURL}noticias/`, {
             headers: {
               'Authorization': `Bearer ${tokenAutenticacion}`
             }
           });
-          this.obtenerCampeones();
+          this.noticias = response.data;
         } catch (error) {
-          console.error("Error al eliminar el campeón:", error);
+          console.error("Error al obtener las noticias:", error);
         }
       },
-      agregarCampeones() {
-        this.$router.push({ name: 'champion' });
+      async eliminarNoticia(idNoticia) {
+        const tokenAutenticacion = localStorage.getItem("jwt");
+        const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
+  
+        try {
+          await axios.delete(`${serverURL}noticias/${idNoticia}`, {
+            headers: {
+              'Authorization': `Bearer ${tokenAutenticacion}`
+            }
+          });
+          this.obtenerNoticias();
+        } catch (error) {
+          console.error("Error al eliminar la noticia:", error);
+        }
+      },
+      agregarNoticias() {
+        this.$router.push({ name: 'noticias' });
       },
       logout() {
         localStorage.removeItem('jwt');
@@ -125,7 +125,7 @@
   </script>
   
   <style>
-.containercolor {
+  .containercolor {
   background-color: transparent; /* Hace que el contenedor sea transparente */
   padding: 20px;
   border-radius: 10px;
@@ -181,7 +181,7 @@ th {
 }
 
 img {
-  width: 100px;
+  width: 300px;
   height: auto;
 }
 
@@ -228,5 +228,7 @@ h2 {
   background-color: white;
   width: 15%;
 }
+
 </style>
+
   

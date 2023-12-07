@@ -8,6 +8,7 @@
       <router-link :to="{name: 'listaligas'}">Ligas</router-link> 
       <router-link :to="{name: 'listapartidos'}">Partidos</router-link> 
       <router-link :to="{name: 'listachampion'}">Campeones</router-link> 
+      <router-link :to="{name: 'listanoticias'}">Noticias</router-link> 
     </div> 
     </b-sidebar>
     <router-view></router-view>
