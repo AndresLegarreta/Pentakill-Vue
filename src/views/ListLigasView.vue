@@ -121,11 +121,14 @@ async eliminarObjeto(idLiga) {
   const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
 
   try {
-    await axios.delete(`${serverURL}ligas/${idLiga}`, {
+    const response = await axios.delete(`${serverURL}ligas/${idLiga}`, {
       headers: {
         'Authorization': `Bearer ${tokenAutenticacion}`
       }
     });
+    if (response.status === 200) { 
+      console.log("Liga eliminada con éxito.");
+    }
     this.obtenerLigas();
   } catch (error) {
     console.error("Error al eliminar la liga:", error);

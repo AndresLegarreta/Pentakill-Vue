@@ -103,11 +103,14 @@
         const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
   
         try {
-          await axios.delete(`${serverURL}noticias/${idNoticia}`, {
+         const response = await axios.delete(`${serverURL}noticias/${idNoticia}`, {
             headers: {
               'Authorization': `Bearer ${tokenAutenticacion}`
             }
           });
+          if (response.status === 200) { 
+          console.log("Noticia eliminada con éxito.");
+        }
           this.obtenerNoticias();
         } catch (error) {
           console.error("Error al eliminar la noticia:", error);

@@ -103,11 +103,14 @@
         const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
   
         try {
-          await axios.delete(`${serverURL}champ/${idCampeon}`, {
+          const response = await axios.delete(`${serverURL}champ/${idCampeon}`, {
             headers: {
               'Authorization': `Bearer ${tokenAutenticacion}`
             }
           });
+          if (response.status === 200) { 
+          console.log("Campeón eliminado con éxito.");
+        }  
           this.obtenerCampeones();
         } catch (error) {
           console.error("Error al eliminar el campeón:", error);

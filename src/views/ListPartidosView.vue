@@ -177,11 +177,14 @@ export default {
     const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
   
     try {
-      await axios.delete(`${serverURL}partidos/${idPartido}`, {
+      const response = await axios.delete(`${serverURL}partidos/${idPartido}`, {
         headers: {
           'Authorization': `Bearer ${tokenAutenticacion}`
         }
       });
+      if (response.status === 200) { 
+      console.log("Partido eliminado con éxito.");
+    }
       this.obtenerPartidos();
     } catch (error) {
       console.error("Error al eliminar el partido:", error);
