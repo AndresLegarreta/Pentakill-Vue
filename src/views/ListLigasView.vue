@@ -206,7 +206,7 @@ th {
 }
 
 img {
-  width: 100px;
+  width: 50px;
   height: auto;
 }
 
