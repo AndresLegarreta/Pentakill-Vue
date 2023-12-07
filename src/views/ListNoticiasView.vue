@@ -181,7 +181,7 @@ th {
 }
 
 img {
-  width: 120px;
+  width: 180px;
   height: auto;
 }
 
