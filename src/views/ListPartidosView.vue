@@ -7,8 +7,10 @@
           <tr>
             <th>Nombre de la Liga</th>
             <th>Nombre del Partido</th>
-            <th>Equipo 1</th>   
+            <th>Equipo 1</th>  
+            <th>Img eq1</th> 
             <th>Equipo 2</th>
+            <th>Img eq2</th>
             <th>Fecha del Partido</th>
             <th>Resultado</th>
             <th>Fase del Partido</th>
@@ -33,10 +35,14 @@
             <b-form-input v-model="partido.equipo1" />
           </td>
 
+          <td><img :src="partido.equipo1imagen" alt="Imagen del equipo 1" class="table-img" /></td>
+
           <td v-if="!partido.editing">{{ partido.equipo2 }}</td>
           <td v-if="partido.editing">
             <b-form-input v-model="partido.equipo2" />
           </td>
+
+          <td><img :src="partido.equipo2imagen" alt="Imagen del equipo 2" class="table-img" /></td>
 
           <td v-if="!partido.editing">{{ partido.fecha }}</td>
           <td v-if="partido.editing">
@@ -94,7 +100,9 @@ export default {
     return{
       nombredeligapl:"",
       equiponum1pl:"",
+      equipoimagen1:"",
       equiponum2pl:"",
+      equipoimagen2:"",
       fechapartidopl:"",
       resultadopl:"",
       numeropartidopl:"",
@@ -118,7 +126,9 @@ export default {
     await axios.patch(`${serverURL}partidos/${partido._id}`, {
       nombreleague: partido.nombreleague,
       equipo1: partido.equipo1,
+      equipo1imagen: partido.equipo1imagen,
       equipo2: partido.equipo2,
+      equipo2imagen: partido.equipo2imagen,
       fecha: partido.fecha,
       equipogp: partido.equipogp,
       gamenm: partido.gamenm,
@@ -138,7 +148,9 @@ export default {
           const requestBody = {
             nombreleague: this.nombredeligapl,
             equipo1: this.equiponum1pl,
+            equipo1imagen: this.equipoimagen1,
             equipo2: this.equiponum2pl,
+            equipo2imagen: this.equipoimagen2,
             fecha: this.fechapartidopl,
             equipogp: this.resultadopl,
             gamernm: this.numeropartidopl,
@@ -300,13 +312,13 @@ body {
   }
   
   table {
-    background-color: white; /* Fondo blanco para la tabla */
+    background-color: #E0E0E0; /* Fondo blanco para la tabla */
   border-radius: 10px; /* Bordes redondeados para la tabla */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   th, td {
-    border: 1px solid #ddd;
+    border: 1px solid white;
     padding: 8px;
     text-align: center;
     vertical-align: middle;
@@ -318,7 +330,7 @@ body {
   }
   
   img {
-    width: 100px;
+    width: 50px;
     height: auto;
   }
   h2 {

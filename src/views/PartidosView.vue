@@ -15,8 +15,16 @@
         <b-form-input id="equipo1" v-model="equiponum1" required></b-form-input>
       </b-form-group>
 
+      <b-form-group label="Imagen del Equipo 1:" label-for="equipo1imagen">
+        <b-form-input id="equipo1imagen" v-model="equiponum1img" required></b-form-input>
+      </b-form-group>
+
       <b-form-group label="Equipo 2:" label-for="equipo2">
         <b-form-input id="equipo2" v-model="equiponum2" required></b-form-input>
+      </b-form-group>
+
+      <b-form-group label="Imagen del Equipo 2:" label-for="equipo2imagen">
+        <b-form-input id="equipo2imagen" v-model="equiponum2img" required></b-form-input>
       </b-form-group>
 
       <b-form-group label="Fecha del Partido:" label-for="fechapartido">
@@ -63,7 +71,9 @@ export default {
       nombredeliga:"",
       nombrepartido:"",
       equiponum1:"",
+      equiponum1img:"",
       equiponum2:"",
+      equiponum2img:"",
       fechapartido:"",
       resultado:"",
       numeropartido:"",
@@ -80,7 +90,9 @@ export default {
         
         nombrepartido: this.nombrepartido,
         equipo1: this.equiponum1,
+        equipo1imagen: this.equiponum1img,
         equipo2: this.equiponum2,
+        equipo2imagen: this.equiponum1img,
         fecha: this.fechapartido,
         equipogp: this.resultado,
         gamenm: this.numeropartido,
