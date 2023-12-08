@@ -209,7 +209,7 @@ th {
 }
 
 img {
-  width: 20px;
+  width: 80px;
   height: auto;
 }
 

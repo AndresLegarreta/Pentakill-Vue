@@ -334,7 +334,7 @@ body {
   }
   
   img {
-    width: 20px;
+    width: 50px;
     height: auto;
   }
   h2 {
