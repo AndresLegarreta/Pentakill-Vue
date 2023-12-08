@@ -67,7 +67,8 @@
               'Authorization': `Bearer ${tokenAutenticacion}`
             }
           });
-          console.log(response);
+          alert('Noticia creada con exito');
+          console.log(response)
         } catch (error) {
           console.error("Error al agregar la noticia:", error);
         }

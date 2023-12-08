@@ -183,7 +183,7 @@ export default {
         }
       });
       if (response.status === 200) { 
-      console.log("Partido eliminado con éxito.");
+      alert("Partido eliminado con éxito.");
     }
       this.obtenerPartidos();
     } catch (error) {

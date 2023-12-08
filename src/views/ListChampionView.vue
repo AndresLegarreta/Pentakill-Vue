@@ -8,6 +8,7 @@
             <tr>
               <th>Imagen</th>
               <th>Nombre</th>
+              <th>Rol</th>
               <th>Alias</th>
               <th>Descripción</th>      
             </tr>
@@ -19,6 +20,10 @@
               <td v-if="!campeon.editing">{{ campeon.name }}</td>
               <td v-if="campeon.editing">
                 <b-form-input v-model="campeon.name" />
+              </td>
+              <td v-if="!campeon.editing">{{ campeon.role }}</td>
+              <td v-if="campeon.editing">
+                <b-form-input v-model="campeon.role" />
               </td>
               <td v-if="!campeon.editing">{{ campeon.description }}</td>
               <td v-if="campeon.editing">
@@ -71,6 +76,7 @@
         try {
           await axios.put(`${serverURL}champ/${campeon._id}`, {
             name: campeon.name,
+            role: campeon.role,
             blurb: campeon.blurb,
             image: campeon.image,
             description: campeon.description
@@ -109,7 +115,7 @@
             }
           });
           if (response.status === 200) { 
-          console.log("Campeón eliminado con éxito.");
+          alert("Campeón eliminado con éxito.");
         }  
           this.obtenerCampeones();
         } catch (error) {

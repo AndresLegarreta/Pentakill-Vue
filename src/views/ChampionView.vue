@@ -23,7 +23,7 @@
         <br>
         <b-form-group label="Alias">
           <b-form-input
-            v-model="aliasCampeon"
+            v-model="descripcionCampeon"
             placeholder="Ingrese un alias"
             required
           ></b-form-input>
@@ -31,7 +31,7 @@
         <br>
         <b-form-group label="Descripción">
           <b-form-input
-            v-model="descripcionCampeon"
+            v-model="aliasCampeon"
             placeholder="Ingrese una descripción"
             required
           ></b-form-input>
@@ -80,15 +80,19 @@
           blurb: this.aliasCampeon
         }
         const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
-  
+        try{
         const response = await axios.post(`${serverURL}champ/`, 
           requestBody, {
             headers: {
               'Authorization': `Bearer ${tokenAutenticacion}`
             }
           }
-        ); 
-        console.log(response); 
+        );
+        alert('Campeón creado con exito'); 
+        console.log(response);
+      } catch (error) {
+          console.error("Error al agregar la noticia:", error);
+        } 
       },
       backbutton() {
         this.$router.push({ name: 'listachampion' });

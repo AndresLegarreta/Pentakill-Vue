@@ -109,7 +109,7 @@
             }
           });
           if (response.status === 200) { 
-          console.log("Noticia eliminada con éxito.");
+          alert("Noticia eliminada con éxito.");
         }
           this.obtenerNoticias();
         } catch (error) {

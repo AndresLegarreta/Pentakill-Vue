@@ -127,7 +127,7 @@ async eliminarObjeto(idLiga) {
       }
     });
     if (response.status === 200) { 
-      console.log("Liga eliminada con éxito.");
+      alert("Liga eliminada con éxito.");
     }
     this.obtenerLigas();
   } catch (error) {

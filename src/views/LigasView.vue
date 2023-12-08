@@ -66,7 +66,7 @@ export default {
         imagen: this.imagenliga
       }
       const serverURL = "https://tasty-pig-flip-flops.cyclic.app/";
-
+      try{
       const response = await axios.post(`${serverURL}ligas/crear`, 
       requestBody,
        {
@@ -74,8 +74,12 @@ export default {
           'Authorization': `Barer ${tokenAutenticacion}`
         }
       }
-    ); 
-    console.log(response); 
+    );
+    alert('Liga creada con exito'); 
+    console.log(response);
+  } catch (error) {
+          console.error("Error al agregar la liga:", error);
+  } 
     
 },
 backbutton(){

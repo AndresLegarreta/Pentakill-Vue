@@ -50,12 +50,16 @@
         }
   
         const serveUrl = "https://tasty-pig-flip-flops.cyclic.app/";
-  
+        try{
         const response = await axios.post(
           `${serveUrl}users/registrar`,
           requestBody
         );
-        console.log(response)
+        alert('Registro exitoso');
+          console.log(response)
+        } catch (error) {
+          console.error("Error al hacer el registro:", error);
+        }
       }
     }
   }

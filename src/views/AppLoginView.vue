@@ -70,6 +70,7 @@ export default {
 
       this.$router.push({path: "/dashboard"})      
       
+      alert("Login exitoso");
     }else{
       alert("Error en el Login")
       }
