@@ -303,7 +303,7 @@ body {
     font-family: 'Times New Roman', Times, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
+    color: white;
     margin-top: 60px;
     display: flex;
     flex-direction: column;
@@ -315,7 +315,7 @@ body {
   }
   
   table {
-    background-color: #E0E0E0; /* Fondo blanco para la tabla */
+    background-color: gray; /* Fondo blanco para la tabla */
   border-radius: 10px; /* Bordes redondeados para la tabla */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -329,11 +329,12 @@ body {
   }
   
   th {
+    color: black;
     background-color: #f2f2f2;
   }
   
   img {
-    width: 50px;
+    width: 20px;
     height: auto;
   }
   h2 {

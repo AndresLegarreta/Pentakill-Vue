@@ -184,7 +184,7 @@ th {
 }
 
 img {
-  width: 50px;
+  width: 20px;
   height: auto;
 }
 
